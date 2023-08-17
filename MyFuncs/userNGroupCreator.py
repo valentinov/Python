@@ -14,10 +14,10 @@ def create_users(userlist):
             exitcode = os.system("id {}".format(user))
             if exitcode != 0:
                 try:
-                    print("User [{}] does not exist. Adding it".format(user))
+                    print("User [{}] does not exist. Creating it".format(user))
                     os.system("sudo useradd {}".format(user))
                 except Exception as e:
-                    print(f"Error adding user [{user}]: {e}")
+                    print(f"Error creating user [{user}]: {e}")
             else:
                 print("User [{}] already exists, skipping it.".format(user))
     except Exception as e:
@@ -33,7 +33,7 @@ def create_group(groupname):
     try:
         exitcode = os.system(f"grep {groupname} /etc/group")
         if exitcode != 0:
-            print(f"Group [{groupname}] does not exist. Adding it.")
+            print(f"Group [{groupname}] does not exist. Creating it.")
             os.system(f"sudo groupadd {groupname}")
         else:
             print("Group [{groupname}] already exists, skipping it.")
