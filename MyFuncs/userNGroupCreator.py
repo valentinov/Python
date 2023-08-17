@@ -20,7 +20,7 @@ def check_and_create_users(userlist):
             else:
                 print("User [{}] already exists, skipping it.".format(user))
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An error occurred: [{e}]")
 
 def create_group(groupname):
     """
@@ -35,16 +35,35 @@ def create_group(groupname):
             print(f"Group [{groupname}] does not exist. Adding it.")
             os.system(f"sudo groupadd {groupname}")
         else:
-            print("Group already exists, skipping it.")
+            print("Group [{groupname}] already exists, skipping it.")
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An error occurred: [{e}]")
 
+def add_users_group(userlist, groupname):
+    """
+    Adds multiple users to a group and checks if users are already in the group.
 
+    :param userlist: List of user names to be added to the group.
+    :type userlist: list
+    :param groupname: Group name to which the users will be added.
+    :type groupname: str
+    """
+    try:
+        for user in userlist:
+            exitcode = os.system(f"id {user} | grep -q '{groupname}'")
+            if exitcode != 0:
+                print(f"Adding user [{user}] to the group [{groupname}].")
+                os.system(f"usermod -G {groupname} {user}")
+            else:
+                print(f"User [{user}] is already in the group [{groupname}].")
+    except Exception as e:
+        print(f"An error occurred: [{e}]")
 
 # Example usage
-
 users_to_check = ["user1", "user2", "user3"]
 check_and_create_users(users_to_check)
 
 group_name = "ops"
 check_and_create_group(group_name)
+
+add_users_group(users_to_check, group_name)
