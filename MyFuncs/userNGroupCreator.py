@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import os
 
 def check_and_create_users(userlist):
