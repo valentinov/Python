@@ -14,12 +14,12 @@ def create_users(userlist):
             exitcode = os.system("id {}".format(user))
             if exitcode != 0:
                 try:
-                    print("User [{}] does not exist. Creating it".format(user))
-                    os.system("sudo useradd {}".format(user))
+                    print(f"User [{user}] does not exist. Creating it")
+                    os.system("sudo useradd {user}")
                 except Exception as e:
                     print(f"Error creating user [{user}]: {e}")
             else:
-                print("User [{}] already exists, skipping it.".format(user))
+                print(f"User [{user}] already exists, skipping it.")
     except Exception as e:
         print(f"An error occurred: [{e}]")
 
