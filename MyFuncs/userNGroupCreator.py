@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import os
 
-def check_and_create_users(userlist):
+def create_users(userlist):
     """
     Checks if users exist using the 'id' command and adds them if they don't exist.
 
@@ -62,9 +62,9 @@ def add_users_group(userlist, groupname):
 
 # Example usage
 users_to_check = ["user1", "user2", "user3"]
-check_and_create_users(users_to_check)
+create_users(users_to_check)
 
 group_name = "ops"
-check_and_create_group(group_name)
+create_group(group_name)
 
 add_users_group(users_to_check, group_name)
