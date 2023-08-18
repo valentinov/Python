@@ -39,7 +39,7 @@ def permission_owner(folder_path, owner, permission):
         print(f"ERROR! An unexpected error occurred: [{e}]")
         
 # Example
-folder_path = "/opt/apple"
+folder_path = "/home/ubuntu/opt/apple/red"
 new_owner = "user1"
 new_permission = "770"
 new_folder(folder_path)
