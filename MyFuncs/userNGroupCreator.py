@@ -15,7 +15,7 @@ def create_users(userlist):
             if exitcode != 0:
                 try:
                     print(f"User [{user}] does not exist. Creating it")
-                    os.system("sudo useradd {user}")
+                    os.system(f"sudo useradd {user}")
                 except Exception as e:
                     print(f"Error creating user [{user}]: {e}")
             else:
@@ -62,9 +62,9 @@ def add_users_group(userlist, groupname):
 
 # Example usage
 users_to_check = ["user1", "user2", "user3"]
+group_name = "ops"
 create_users(users_to_check)
 
-group_name = "ops"
 create_group(group_name)
 
 add_users_group(users_to_check, group_name)
