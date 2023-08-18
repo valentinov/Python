@@ -30,9 +30,12 @@ def permission_owner(folder_path, owner, permission):
     """
     try:
         if os.path.exists(folder_path):
-            os.system(f"chown :{owner} {folder_path}")
-            os.system(f"chmod {permission} {folder_path}")
-            print(f"SUCCESS! Permission and owner updated for folder: [{folder_path}]")
+            chown_exit = os.system(f"chown :{owner} {folder_path}")
+            chmod_exit = os.system(f"chmod {permission} {folder_path}")
+            if chown_exit == 0 and chmod_exit == 0:
+                print(f"SUCCESS! Permission and owner updated for folder: [{folder_path}]")
+            else:
+                print(f"ERROR! Failed to modify permission or owner for folder: [{folder_path}]")
         else:
             print(f"ERROR! Folder [{folder_path}] does not exist.")
     except Exception as e:
