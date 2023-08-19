@@ -11,7 +11,7 @@ def create_users(userlist):
     try:
         for user in userlist:
             print(user)
-            exitcode = os.system("id {}".format(user))
+            exitcode = os.system(f"id {user}")
             if exitcode != 0:
                 try:
                     print(f"User [{user}] does not exist. Creating it")
