@@ -33,8 +33,11 @@ def create_group(groupname):
     try:
         exitcode = os.system(f"grep {groupname} /etc/group")
         if exitcode != 0:
-            print(f"Group [{groupname}] does not exist. Creating it.")
-            os.system(f"sudo groupadd {groupname}")
+            try:
+                print(f"Group [{groupname}] does not exist. Creating it.")
+                os.system(f"sudo groupadd {groupname}")
+            except Exception as e:
+                print(f"Error creating group [{groupname}]: {e}")
         else:
             print("Group [{groupname}] already exists, skipping it.")
     except Exception as e:
@@ -53,8 +56,11 @@ def add_users_group(userlist, groupname):
         for user in userlist:
             exitcode = os.system(f"id {user} | grep -q '{groupname}'")
             if exitcode != 0:
-                print(f"Adding user [{user}] to the group [{groupname}].")
-                os.system(f"usermod -G {groupname} {user}")
+                try:
+                    print(f"Adding user [{user}] to the group [{groupname}].")
+                    os.system(f"usermod -G {groupname} {user}")
+                except Exception as e:
+                    print(f"Error adding [{user}] user to [{groupname}] group: {e}")
             else:
                 print(f"User [{user}] is already in the group [{groupname}].")
     except Exception as e:
@@ -63,8 +69,7 @@ def add_users_group(userlist, groupname):
 # Example usage
 users_to_check = ["user1", "user2", "user3"]
 group_name = "ops"
+
 create_users(users_to_check)
-
 create_group(group_name)
-
 add_users_group(users_to_check, group_name)
