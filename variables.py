@@ -31,7 +31,7 @@ print (mya)
 print(mylist[2])
 print(mytuple[1])
 # use slices to get parts of a sequence
-print(mylist[1:4:2])
+print(mylist[1:4:2]) # get the 2nd through the 4th item, skipping every 2nd one
 # you can use slices to reverse a sequence
 print(mylist[::-1])
 
